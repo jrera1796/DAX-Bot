@@ -8,7 +8,7 @@ var token = config.MY_API_TOKEN;
 var key = config.SECRET_API_KEY;
 
 
-var telAPI = "https://api.telegram.org/bot" + token + key + "/sendPhoto?chat_id=" + chatSelf + "&photo=" + photoTest + "&caption=" + textTest;
+var telAPI = "https://api.telegram.org/bot" + token + key + "/sendPhoto?chat_id=" + chat_id + "&photo=" + photoTest + "&caption=" + textTest;
 
 async function makePost() {
   const data = {
