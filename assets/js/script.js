@@ -29,7 +29,7 @@ async function makePost() {
       });
       if (response.ok) {
           console.log("Posting To Telegram")
-          console.log(respone)
+          console.log(response)
           
       } else {
           console.log("Something went wrong")
