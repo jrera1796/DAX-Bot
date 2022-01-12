@@ -1,10 +1,7 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 
-// GET /api/users
 router.get('/', (req, res) => {
-  //Acess our User model and run .findAll() method
-  //SELECT * FROM users;
   User.findAll({
     attributes: {exclude: ['password']}
   })
@@ -15,9 +12,7 @@ router.get('/', (req, res) => {
     });
 });
 
-// GET /api/users/1
 router.get('/:id', (req, res) => {
-  //SELECT * FROM users WHERE id =
   User.findOne({
     attributes: {exclude: ['password']},
     where: {
@@ -37,10 +32,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
-// POST /api/users
 router.post('/', (req, res) => {
-  //INSERT INTO users
-  //expects {username: '', email: '', password: ''}
   User.create({
     username: req.body.username,
     email: req.body.email,
@@ -55,8 +47,6 @@ router.post('/', (req, res) => {
 
 router.post('/login', (req, res) => {
 
-  // Query operation
-// expects {email: '', password: ''}
 User.findOne({
   where: {
     email: req.body.email
@@ -74,13 +64,8 @@ User.findOne({
 }); 
 })
 
-// PUT /api/users/1
 router.put('/:id', (req, res) => {
-  // expects {username: '', email: '', password: ''}
-  // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
-  User.update(req.body, {
-    //pass in req.body instead to only update what's passed through
-    individualHooks: true,
+  User.update({
     where: {
       id: req.params.id
     }
@@ -98,9 +83,8 @@ router.put('/:id', (req, res) => {
     });
 });
 
-// DELETE /api/users/1
-router.delete('/:id', (req, res) => { 
-  //Delete data
+
+router.delete('/:id', (req, res) => {
   User.destroy({
     where: {
       id: req.params.id
