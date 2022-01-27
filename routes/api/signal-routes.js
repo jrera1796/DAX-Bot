@@ -5,7 +5,9 @@ const token = process.env.API_TOKEN
 const bot = new TelegramBot(token, {polling: true});
 
 router.post('/', (req, res) => {
+  console.log(req)
   Signals.create({
+    
     post_text: req.body.post_text,
     signal: req.body.signal
 
