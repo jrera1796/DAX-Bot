@@ -18,7 +18,7 @@ Signals.init(
         len: [1]
       }
     },
-    signal: {
+    calledAt: {
       type: DataTypes.STRING,
       allowNull: false
       
@@ -30,7 +30,7 @@ Signals.init(
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: 'signal'
+    modelName: 'Signals'
   }
 );
 
