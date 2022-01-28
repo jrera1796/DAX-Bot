@@ -11,7 +11,7 @@ router.post('/', (req, res) => {
      calledAt: req.body.calledAt
   })
     .then(dbUserData => {
-const calledAtNew = dateFormat(calledAt)
+const calledAtNew = dateFormat(req.body.calledAt)
       bot.sendMessage(1182469925, 
        
           `${req.body.post_text}, Called at ${calledAtNew}`
