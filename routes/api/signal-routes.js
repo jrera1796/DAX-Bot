@@ -14,7 +14,7 @@ router.post('/', (req, res) => {
 const calledAtNew = dateFormat(req.body.calledAt)
       bot.sendMessage(1182469925, 
        
-          `Relative Session Time \n ${calledAtNew} \n\n ${req.body.post_text},`
+          `Relative Session Time \n${calledAtNew}\n\n ${req.body.post_text},`
           )
 res.json(dbUserData)})
     .catch(err => {
