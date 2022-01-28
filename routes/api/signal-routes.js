@@ -3,7 +3,7 @@ const router = require('express').Router();
 const TelegramBot = require('node-telegram-bot-api');
 const token = process.env.API_TOKEN
 const bot = new TelegramBot(token, {polling: true});
-const dateFormat = require('../utils/dateFormat');
+const dateFormat = require('../../utils/dateFormat');
 
 router.post('/', (req, res) => {
   Signals.create({
