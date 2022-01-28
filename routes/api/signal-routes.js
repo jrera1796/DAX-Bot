@@ -3,6 +3,7 @@ const router = require('express').Router();
 const TelegramBot = require('node-telegram-bot-api');
 const token = process.env.API_TOKEN
 const bot = new TelegramBot(token, {polling: true});
+const dateFormat = require('../utils/dateFormat');
 
 router.post('/', (req, res) => {
   Signals.create({
@@ -10,9 +11,10 @@ router.post('/', (req, res) => {
      calledAt: req.body.calledAt
   })
     .then(dbUserData => {
+calledAtNew => dateFormat(calledAt)
       bot.sendMessage(1182469925, 
        
-          `New signal called at ${req.body.post_text} \n Activted at ${req.body.calledAt}`
+          `${req.body.post_text}, Called at ${calledAt}`
           )
 res.json(dbUserData)})
     .catch(err => {
