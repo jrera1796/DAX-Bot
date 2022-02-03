@@ -2,51 +2,30 @@ const Signals = require('../../models/Signals');
 const router = require('express').Router();
 const TelegramBot = require('node-telegram-bot-api');
 const token = process.env.API_TOKEN
-const bot = new TelegramBot(token, {polling: true});
+const bot = new TelegramBot(token, { polling: true });
 const dateFormat = require('../../utils/dateFormat');
 
 router.post('/', (req, res) => {
   Signals.create({
     post_text: req.body.post_text,
-     calledAt: req.body.calledAt
+    calledAt: req.body.calledAt
   })
     .then(dbUserData => {
-const calledAtNew = dateFormat(req.body.calledAt)
-      bot.sendMessage(1182469925, 
-       
-          `Relative Session Time \n${calledAtNew}\n\n ${req.body.post_text},`
-          )
-res.json(dbUserData)})
+      const calledAtNew = dateFormat(req.body.calledAt)
+      //Import bot from a different folder and make it private
+      bot.sendMessage(1182469925, `Relative Session Time\n${calledAtNew}\n\n\n${req.body.post_text},`)
+      res.json(dbUserData)
+      // bot.getMyCommands().then(data => {console.log(data)})
+    })
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
     });
 });
 
-// router.post('/', (req, res) => {
-//   console.log(req)
-//   Signals.create({
-    
-//     post_text: req.body.post_text,
-//     signal: req.body.signal
-
-//   })
-//     .then(data => {
-     
-//         // bot.sendMessage(1182469925, 
-//         console.log(
-//           `New signal called at ${req.body.post_text} \n Activted at ${req.body.signal}`
-//           );
-//       console.log(data)
-//       return res.json({status: 'done'})
-//     })
-//     .catch(err => {
-//       console.log(err);
-//       res.status(400).json(err);
-//     });
-// });
-
 router.use((req, res) => {
   res.status(404).end();
 });
+
+
 module.exports = router;
