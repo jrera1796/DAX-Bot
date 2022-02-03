@@ -32,6 +32,6 @@ It includes the 30 largest companies listed on the Frankfurt Stock Exchange.
 Made by Jose R.
 
 ## Questions
-For any questions regarding this bot, feel free to reach out to me 
-[GitHub/JRera1796](https://github.com/jrera1796)
+For any questions regarding this bot, feel free to reach out to me.  
+[GitHub/JRera1796](https://github.com/jrera1796)  
 Telegram [@Qapital_J](https://t.me/qapital_j)
