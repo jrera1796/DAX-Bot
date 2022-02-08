@@ -1,12 +1,2 @@
 DROP DATABASE IF EXISTS DAX_db;
 CREATE DATABASE DAX_db;
-
-USE TABLE DAX_db;
-
--- CREATE TABLE posts(
---   id AUTO_INCREMENT PRIMARY KEY,
---   post_text VARCHAR(30),
---   signal VARCHAR(30),
---   created_at DEFAULT NULL
-  
--- )

@@ -15,7 +15,6 @@ router.post('/', (req, res) => {
       //Import bot from a different folder and make it private
       bot.sendMessage(1182469925, `Relative Session Time\n${calledAtNew}\n\n\n${req.body.post_text},`)
       res.json(dbUserData)
-      // bot.getMyCommands().then(data => {console.log(data)})
     })
     .catch(err => {
       console.log(err);
