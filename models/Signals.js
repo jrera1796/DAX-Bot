@@ -11,16 +11,32 @@ Signals.init(
       primaryKey: true,
       autoIncrement: true
     },
-    post_text: {
+    exchange: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: [1]
       }
     },
-    calledAt: {
+    ticker: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        len: [1]
+      }
+      
+    },
+    interval: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1]
+      }
+      
+    },
+    notes: {
+      type: DataTypes.STRING,
+      allowNull: true
       
     },
     

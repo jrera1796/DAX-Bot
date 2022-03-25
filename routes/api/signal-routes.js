@@ -4,46 +4,64 @@ const TelegramBot = require('node-telegram-bot-api');
 const token = process.env.API_TOKEN
 const bot = new TelegramBot(token, { polling: true });
 const dateFormat = require('../../utils/dateFormat');
-const { default: axios } = require('axios');
-const axios = require('axios')
+require('dotenv').config
 
-const key = `https://api.chart-img.com/v1/tradingview/advanced-chart?symbol=OANDA:DE30EUR&interval=1h&width=500&height=300&key=7e1e270f-a954-46df-be6a-03bf2745370f`
+bot.on('message', (msg) => {
+  const chatId = msg.chat.id;
 
-  console.log('Fetching chart image through signals')
-try {
-  axios.get(key)
+  if (msg.text === 'Current Analysis') {
+    Signals.findAll({
+      attributes: ['id', 'exchange', 'ticker', 'notes', 'createdAt']
+    }).then(data => {
+      return data
+    })
+      .then(res => {
+        //save image in temporary folder
+        let r = res.slice(-1)
+        let data = r[0].dataValues
+        let time = dateFormat(data.createdAt)
 
-.then(res => res)
-.then(console.log(res))
-}
-catch{(err => {console.log(err)})
-}
+        bot.sendMessage(chatId, 
+          `${data.exchange}:${data.ticker}\n\n${data.notes}\n${time}`
+          )
+      })
+      .catch(
+        err => { console.log(err) }
+      )
+  }
+
+  else{
+bot.sendMessage(chatId, 'Hmm not sure')
+  }
+
+});
 
 router.post('/', (req, res) => {
 
-
-
   Signals.create({
-    post_text: req.body.post_text,
-    calledAt: req.body.calledAt
+    exchange: req.body.exchange,
+    ticker: req.body.ticker,
+    interval: req.body.interval,
+    notes: req.body.notes
+
   })
     .then(dbUserData => {
-      const calledAtNew = dateFormat(req.body.calledAt)
-      //Import bot from a different folder and make it private
-      bot.sendMessage(1182469925, `Relative Session Time\n${calledAtNew}\n\n\n${req.body.post_text},`)
-      res.json(dbUserData)
-    }).then(
-//bot(chatId, photo link)
+      lastID = dbUserData.id
+      console.log(dbUserData.id)
+      const str = `https://api.chart-img.com/v1/tradingview/advanced-chart?symbol=${req.body.exchange}:${req.body.ticker}&interval=${req.body.interval}&width=500&height=300&key=${process.env.IMG_KEY}`
+      console.log(str)
+      bot.sendPhoto(1182469925, str)
+      //Import bot from a different folder
+      bot.sendMessage(1182469925, `Testing chartIMG`)
 
-      bot.sendPhoto(1182469925, `https://api.chart-img.com/v1/tradingview/advanced-chart?symbol=OANDA:DE30EUR&interval=1h&width=500&height=300&key=7e1e270f-a954-46df-be6a-03bf2745370f`)
-    ).then(
-      bot.setMyCommands({CA: 'Current Analysis'})
-    )
+      res.json(dbUserData)
+
+    })
     .catch(err => {
-      if(err) throw err;
+      if (err) throw err;
       console.log("Couldn't create post")
       return;
-    })  
+    })
 });
 
 router.use((req, res) => {
