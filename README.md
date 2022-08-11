@@ -35,3 +35,7 @@ Made by Jose R.
 For any questions regarding this bot, feel free to reach out to me.  
 [GitHub/JRera1796](https://github.com/jrera1796)  
 Telegram [@Qapital_J](https://t.me/qapital_j)
+
+## Updates
+
+- Chart Image API is no longer being updated.
