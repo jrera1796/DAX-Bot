@@ -1,6 +1,7 @@
-const User = require('./User');
+const Users = require('./Users');
+const BetaPosters = require('./BetaPosters');
 const Signal = require('./Signals')
 
 
 
-module.exports = { User, Signal };
+module.exports = { Users, Signal, BetaPosters };

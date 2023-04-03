@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { Users } = require('../../models');
 
 router.get('/', (req, res) => {
-  User.findAll({
+  Users.findAll({
     attributes: {exclude: ['password']}
   })
     .then(dbUserData => res.json(dbUserData))
@@ -57,7 +57,7 @@ User.findOne({
     return;
   }
 
-  res.json({ user: dbUserData });
+  res.json({ Users: dbUserData });
 
   // Verify user
 
@@ -65,7 +65,7 @@ User.findOne({
 })
 
 router.put('/:id', (req, res) => {
-  User.update({
+  Users.update({
     where: {
       id: req.params.id
     }
@@ -85,7 +85,7 @@ router.put('/:id', (req, res) => {
 
 
 router.delete('/:id', (req, res) => {
-  User.destroy({
+  Users.destroy({
     where: {
       id: req.params.id
     }

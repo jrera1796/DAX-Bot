@@ -44,6 +44,10 @@ Signals.init(
       allowNull: true
       
     },
+    notified: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
     
   },
   {
