@@ -2,7 +2,7 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 //const bcrypt = require('bcrypt');
 
-class Users extends Model {}
+class Users extends Model { }
 
 Users.init(
   {
@@ -12,6 +12,17 @@ Users.init(
       primaryKey: true,
       autoIncrement: true,
     },
+
+    firstname: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+
+    lastname: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+
     username: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -34,8 +45,16 @@ Users.init(
     role: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: 'user',
+      defaultValue: 'subscriber',
     },
+    joined_on: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    last_interaction: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    }
   },
   {
     // Commented out hooks and bcrypt until needed

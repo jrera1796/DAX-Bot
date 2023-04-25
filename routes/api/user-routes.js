@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  User.findOne({
+  Users.findOne({
     attributes: {exclude: ['password']},
     where: {
       id: req.params.id
@@ -33,7 +33,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  User.create({
+  Users.create({
     username: req.body.username,
     email: req.body.email,
     password: req.body.password
@@ -47,7 +47,7 @@ router.post('/', (req, res) => {
 
 router.post('/login', (req, res) => {
 
-User.findOne({
+Users.findOne({
   where: {
     email: req.body.email
   }
